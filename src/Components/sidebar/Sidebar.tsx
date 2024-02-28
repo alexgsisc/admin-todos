@@ -3,6 +3,29 @@ import React from "react";
 import { CiBookmarkCheck, CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
 import Link from "next/link";
+import {
+  IoCalendarOutline,
+  IoCheckboxOutline,
+  IoListOutline,
+} from "react-icons/io5";
+
+const menuItems = [
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: <IoCalendarOutline />,
+  },
+  {
+    path: "/dashboard/rest-todos",
+    name: "Rest",
+    icon: <IoCheckboxOutline />,
+  },
+  {
+    path: "/dashboard/dashboard",
+    name: "Server Action",
+    icon: <IoListOutline />,
+  },
+];
 
 export const Sidebar = () => {
   return (
@@ -36,17 +59,9 @@ export const Sidebar = () => {
           </div>
 
           <ul className="space-y-2 tracking-wide mt-8">
-            {/* Active className: text-white bg-gradient-to-r from-sky-600 to-cyan-400 */}
-            {SidebarItem({
-              path: "/",
-              name: "Dashboard",
-              icon: <CiBookmarkCheck />,
-            })}
-            {SidebarItem({
-              path: "/category",
-              name: "Categories",
-              icon: <CiBookmarkCheck />,
-            })}
+            {menuItems.map((item) => (
+              <SidebarItem key={item.name} {...item} />
+            ))}
           </ul>
         </div>
 
