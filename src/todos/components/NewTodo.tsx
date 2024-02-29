@@ -17,6 +17,7 @@ export const NewTodo = () => {
     }
     console.log("form submit" + description);
     apiTodo.createTodo(description);
+    setDescription("");
     router.refresh();
     
   };
