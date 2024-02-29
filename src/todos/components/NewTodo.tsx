@@ -6,7 +6,7 @@ import * as apiTodo from "@/todos/helpers/todos";
 import { useRouter } from "next/navigation";
 
 export const NewTodo = () => {
-    const router = useRouter();
+  const router = useRouter();
 
   const [description, setDescription] = React.useState("");
 
@@ -19,8 +19,12 @@ export const NewTodo = () => {
     apiTodo.createTodo(description);
     setDescription("");
     router.refresh();
-    
   };
+
+  const deleteCompleted = async () => {
+    apiTodo.deleteTodosCompleted();
+    router.refresh();
+  }
 
   return (
     <form onSubmit={onSubmit} className="flex w-full">
@@ -42,7 +46,7 @@ export const NewTodo = () => {
       <span className="flex flex-1"></span>
 
       <button
-        //TODO: onClick={ () => deleteCompleted() }
+        onClick={ () => deleteCompleted() }
         type="button"
         className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all"
       >

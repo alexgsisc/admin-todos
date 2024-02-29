@@ -35,3 +35,13 @@ export const createTodo = async (description: string): Promise<Todo> => {
   console.log(`Create new todo: ${todoResp}`);
   return todoResp;
 };
+
+export const deleteTodosCompleted = async (): Promise<number> => {
+  const todoResp = await fetch("/api/v1/todos", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+  return todoResp;
+};
