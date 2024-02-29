@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { TodosGrid } from "@/todos";
+import { NewTodo, TodosGrid } from "@/todos";
 
 export default async function RestTodosPage() {
   // Use primas
@@ -14,7 +14,11 @@ export default async function RestTodosPage() {
 
   return (
     <div>
-      {/*TODO: Form by add new todo*/}
+      {/*Form by add new todo*/}
+      <div className="w-full px-3 mx-5 mb-5">
+        <NewTodo />
+      </div>
+
       <h1>Page Rest Todos</h1>
       <TodosGrid todos={todos} />
     </div>
