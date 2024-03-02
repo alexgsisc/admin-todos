@@ -1,6 +1,12 @@
 import prisma from "@/lib/prisma";
 import { NewTodo, TodosGrid } from "@/todos";
 
+
+export const metadata = {
+  title: "Rest Todos",
+  description: "Get data for Rest Todos",
+}
+
 export default async function RestTodosPage() {
   // Use primas
   const todos = await prisma.todo.findMany({ orderBy: { description: "asc" } });
