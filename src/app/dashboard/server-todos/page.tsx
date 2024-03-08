@@ -1,3 +1,7 @@
+//https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import prisma from "@/lib/prisma";
 import { NewTodo, NewTodoWithAction, TodosGrid, TodosGridWithAction } from "@/todos";
 
@@ -10,6 +14,7 @@ export default async function ServerTodoPage() {
     // Use primas
   const todos = await prisma.todo.findMany({ orderBy: { description: "asc" } });
 
+  console.log('construido');
 
   return (
     <>
