@@ -6,7 +6,7 @@ import { useState } from "react";
 
 interface TabBarProps {
     currentTab?: number;
-    tabOptions: number[];
+    tabOptions?: number[];
 }
 
 export const TabBar = ({ tabOptions = [1, 2, 3, 4, 5], currentTab = 1 }: TabBarProps) => {
