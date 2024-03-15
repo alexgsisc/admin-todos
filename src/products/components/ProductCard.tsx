@@ -1,6 +1,9 @@
+'use client'
 import Image from "next/image"
 import { IoAddCircleOutline, IoTrashOutline } from "react-icons/io5"
 import { Star } from "./Star";
+import { addProductToCart, removeProductToCart } from "@/shoping-cart/actions/actions";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   id: string;
@@ -11,6 +14,19 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ id, name, price, rating, image }: ProductCardProps) => {
+
+  const router = useRouter();
+  
+  const onAddToCart = () => {
+    addProductToCart(id);
+    router.refresh();
+  }
+
+  const onRemoveToCart = () => {
+    removeProductToCart(id);
+    router.refresh();
+  }
+
   return (
     <div className="bg-white shadow rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-100">
 
@@ -51,22 +67,22 @@ export const ProductCard = ({ id, name, price, rating, image }: ProductCardProps
 
         {/* Price and Add to Cart */}
         <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900 dark:text-white">$599</span>
+          <span className="text-3xl font-bold text-gray-900 dark:text-white">${price}</span>
 
           <div className="flex">
             <button
+              onClick={onAddToCart}
               className="text-white mr-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               <IoAddCircleOutline size={25} />
             </button>
             <button
+              onClick={onRemoveToCart}
               className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
               <IoTrashOutline size={20} />
             </button>
           </div>
 
         </div>
-
-
       </div>
     </div>
   )
