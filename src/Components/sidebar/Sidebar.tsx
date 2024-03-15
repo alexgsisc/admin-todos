@@ -1,10 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import { CiBookmarkCheck, CiLogout } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
 import Link from "next/link";
 import {
   IoCalendarOutline,
+  IoCarOutline,
   IoCheckboxOutline,
   IoCodeWorkingOutline,
   IoListOutline,
@@ -30,6 +31,11 @@ const menuItems = [
     path: "/dashboard/cookies",
     name: "Cookies",
     icon: <IoCodeWorkingOutline />,
+  },
+  {
+    path: "/dashboard/products",
+    name: "Products",
+    icon: <IoCarOutline />,
   },
 ];
 
