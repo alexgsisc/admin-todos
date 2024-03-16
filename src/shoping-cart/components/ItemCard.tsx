@@ -51,7 +51,7 @@ export const ItemCard = ({ product, quantity }: Props) => {
         {/* Price and Add to Cart */}
         <div className="flex flex-col items-start justify-between">
 
-          <span className="text-gray-900 dark:text-white">
+          <span className="text-white">
             Cantidad: {quantity}
           </span>
           <span className="font-bold text-white">
