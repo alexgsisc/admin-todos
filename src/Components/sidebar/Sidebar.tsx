@@ -8,6 +8,7 @@ import {
   IoCheckboxOutline,
   IoCodeWorkingOutline,
   IoListOutline,
+  IoPeopleOutline,
 } from "react-icons/io5";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -39,6 +40,11 @@ const menuItems = [
     name: "Products",
     icon: <IoCarOutline />,
   },
+  {
+    path: "/dashboard/profile",
+    name: "Profile",
+    icon: <IoPeopleOutline />,
+  }
 ];
 
 export const Sidebar = async () => {
