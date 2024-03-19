@@ -6,7 +6,9 @@ import GoogleProvider from "next-auth/providers/google";
 import { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
-import async from '../../../dashboard/page';
+import CredentialsProvider from "next-auth/providers/credentials";
+import { signInEmailPassword } from "@/auth/actions/auth-actions";
+
 
 export const authOptions: NextAuthOptions = {
     //Add adapter to authOptions
@@ -19,7 +21,28 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID ?? '',
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+        }),
+        CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                email: { label: "Correo electrónico", type: "email", placeholder: "user@domain.com" },
+                password: { label: "Contraseña", type: "password", placeholder: "*******" }
+            },
+
+            async authorize(credentials, req) {
+                // Add logic here to look up the user from the credentials supplied
+                const user = await signInEmailPassword(credentials!.email, credentials!.password);
+
+                if (user) {
+                    // Any object returned will be saved in `user` property of the JWT
+                    return user
+                }
+                return null;
+            }
+
         })
+
+
     ],
 
     session: {
@@ -38,13 +61,16 @@ export const authOptions: NextAuthOptions = {
                     email: token.email ?? 'no-user-email'
                 }
             });
+            if (dbUser?.isActive === false) {
+                throw Error('User is not active');
+            }
             token.roles = dbUser?.roles ?? ['undefined'];
             token.id = dbUser?.id ?? 'undefined';
             return token;
         },
         async session({ session, token, user }) {
-            
-            if(session && session.user) {
+
+            if (session && session.user) {
                 session.user.roles = token.roles;
                 session.user.id = token.id;
             }
