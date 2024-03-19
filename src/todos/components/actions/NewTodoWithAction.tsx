@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { addTodo, deleteTodoCompleted } from "@/todos/actions/todo-actions";
 
 export const NewTodoWithAction = () => {
-  const router = useRouter();
+ 
 
   const [description, setDescription] = React.useState("");
 
